@@ -3,24 +3,32 @@ import Layout from "../layouts/Layout.astro";
 import projects from "../data/projectsWithUrl.json";
 import buyable from "../data/buyable.json";
 import notBuyable from "../data/not.json";
-const seen = buyable.concat(notBuyable);
-const page = (projects as []).filter(p => !seen.includes(p.id)).slice(0, 10);
+import bad from "../data/bad.json";
+const seen = buyable.concat(notBuyable).concat(bad);
+const seenMap = {};
+seen.forEach(s => seenMap[s.id] = true);
+const page = (projects as []).filter(p => !seenMap[p.id]).slice(0, 10);
+
+export const prerender = false;
 ---
 <Layout title="Kickstarter projects">
   <div>
     <button id="saveBtn">Save</button>
   {
     page.map(project => (
-        <div class="project">
+        <div class="project" data-id={project.id}>
             <img src={project.imgs.sm} alt={project.name} />
             <div class="info">
                 <h2>{project.name}</h2>
                 <p>{project.blurb}</p>
                 <a href={project.url}>{project.url}</a>
             </div>
-            <div>
+            <div style="width: 75px">
             <button data-yes={project.id}>Yes</button>
             <button data-no={project.id}>No</button>
+            <input type="text" size="5" />
+            <button data-custom={project.id}>Custom</button>
+            <button data-bad={project.id}>Bad</button>
             </div>
         </div>
       ))
@@ -29,12 +37,29 @@ const page = (projects as []).filter(p => !seen.includes(p.id)).slice(0, 10);
 </Layout>
 
           <script>
+              const yesses = [];
+              const nos = [];
+              const bads = [];
+
             const buttons = document.querySelectorAll("button");
             buttons.forEach(button => {
                 button.addEventListener("click", e => {
                     const yesId = e.target.dataset.yes;
                     const noId = e.target.dataset.no;
-                    console.log(yesId, noId);
+                    const badId = e.target.dataset.bad;
+                    const customId = e.target.dataset.custom;
+                    if (yesId) {
+                        yesses.push({id: yesId});
+                    } else if (noId) {
+                        nos.push({id: noId});
+                    } else if (badId) {
+                        bads.push({id: badId});
+                    } else if (customId) {
+                        const input = e.target.previousElementSibling;
+                        yesses.push({id: customId, url: input.value});
+                    }
+                    const project = e.target.closest(".project");
+                    project.remove();
                 });
             });
 
@@ -42,12 +67,17 @@ const page = (projects as []).filter(p => !seen.includes(p.id)).slice(0, 10);
             saveBtn.addEventListener("click", () => {
                 fetch('/save', {
                     method: 'POST',
-                    body: JSON.stringify({}),
+                    body: JSON.stringify({
+                      buyable: yesses,
+                      non: nos,
+                      bad: bads
+                    }),
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 }).then(res => res.json()).then(res => {
                     console.log(res);
+                    window.location.reload();
                 });
             });
 </script>
