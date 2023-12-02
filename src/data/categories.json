@@ -1,1 +1,91 @@
-[{"name":"Music","sub":["Pop","R&B","Punk"]},{"name":"undefined","sub":["Journalism","Food","Design"]},{"name":"Journalism","sub":["Video","Web","Photo","Audio","Print"]},{"name":"Food","sub":["Drinks","Restaurants","Farms","Cookbooks","Farmer's Markets","Small Batch","Food Trucks","Vegan","Spaces","Events","Community Gardens","Bacon"]},{"name":"Design","sub":["Product Design","Toys","Graphic Design","Interactive Design","Typography","Architecture"]},{"name":"Publishing","sub":["Fiction","Literary Spaces","Literary Journals","Letterpress"]},{"name":"Comics","sub":["Webcomics"]},{"name":"Theater","sub":["Spaces","Plays"]},{"name":"Film & Video","sub":["Comedy"]},{"name":"Technology","sub":["Sound","Software"]}]
+[
+  {
+    "name": "Music",
+    "sub": [
+      "Pop",
+      "R&B",
+      "Punk"
+    ]
+  },
+  {
+    "name": "undefined",
+    "sub": [
+      "Journalism",
+      "Food",
+      "Design"
+    ]
+  },
+  {
+    "name": "Journalism",
+    "sub": [
+      "Video",
+      "Web",
+      "Photo",
+      "Audio",
+      "Print"
+    ]
+  },
+  {
+    "name": "Food",
+    "sub": [
+      "Drinks",
+      "Restaurants",
+      "Farms",
+      "Cookbooks",
+      "Farmer's Markets",
+      "Small Batch",
+      "Food Trucks",
+      "Vegan",
+      "Spaces",
+      "Events",
+      "Community Gardens",
+      "Bacon"
+    ]
+  },
+  {
+    "name": "Design",
+    "sub": [
+      "Product Design",
+      "Toys",
+      "Graphic Design",
+      "Interactive Design",
+      "Typography",
+      "Architecture"
+    ]
+  },
+  {
+    "name": "Publishing",
+    "sub": [
+      "Fiction",
+      "Literary Spaces",
+      "Literary Journals",
+      "Letterpress"
+    ]
+  },
+  {
+    "name": "Comics",
+    "sub": [
+      "Webcomics"
+    ]
+  },
+  {
+    "name": "Theater",
+    "sub": [
+      "Spaces",
+      "Plays"
+    ]
+  },
+  {
+    "name": "Film & Video",
+    "sub": [
+      "Comedy"
+    ]
+  },
+  {
+    "name": "Technology",
+    "sub": [
+      "Sound",
+      "Software"
+    ]
+  }
+]

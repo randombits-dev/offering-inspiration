@@ -7,8 +7,7 @@ import bad from "../data/bad.json";
 const seen = buyable.concat(notBuyable).concat(bad);
 const seenMap = {};
 seen.forEach(s => seenMap[s.id] = true);
-const page = (projects as []).filter(p => !seenMap[p.id]).slice(0, 10);
-
+const page = (projects as []).filter(p => p.cat === 'Design' && !seenMap[p.id]).slice(0, 10);
 export const prerender = false;
 ---
 <Layout title="Kickstarter projects">
