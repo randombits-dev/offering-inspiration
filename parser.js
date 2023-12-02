@@ -6,6 +6,7 @@ const parseFile = (fileName) => {
 
   const projects = [];
   const projectsWithUrl = [];
+  const categories = {};
 
   lines.forEach((line) => {
     try {
@@ -18,6 +19,8 @@ const parseFile = (fileName) => {
           name: data.name,
           blurb: data.blurb,
           url: data.profile.link_url,
+          cat: data.category.parent_name,
+          cat2: data.category.name,
           funded: data.deadline,
           pledged: data.usd_pledged,
           backers: data.backers_count,
@@ -32,15 +35,23 @@ const parseFile = (fileName) => {
           projectsWithUrl.push(item);
         }
 
-
+        if (!categories[item.cat]) {
+          categories[item.cat] = new Set();
+        }
+        categories[item.cat].add(item.cat2);
       }
     } catch (e) {
       console.log('Error parsing JSON', e);
     }
   });
 
-  fs.writeFileSync('data/projects.json', JSON.stringify(projects));
-  fs.writeFileSync('data/projectsWithUrl.json', JSON.stringify(projectsWithUrl));
+  const catOut = Object.entries(categories).map(([key, value]) => {
+    return {name: key, sub: new Array(...value)};
+  });
+
+  fs.writeFileSync('src/data/categories.json', JSON.stringify(catOut));
+  fs.writeFileSync('src/data/projects.json', JSON.stringify(projects));
+  fs.writeFileSync('src/data/projectsWithUrl.json', JSON.stringify(projectsWithUrl));
 };
 
 parseFile('raw/Kickstarter_2023-11-16T03_20_10_045Z.json');
