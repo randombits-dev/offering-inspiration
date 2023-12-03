@@ -1,46 +1,92 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import projects from "../data/projectsWithUrl.json";
-import buyable from "../data/buyable.json";
-const buyableMap = {};
-buyable.forEach(s => buyableMap[s.id] = true);
-const page = (projects as []).filter(p => buyableMap[p.id]).slice(0, 10);
-
+import categories from "../data/categories.json";
+import Card from "../components/Card.astro";
 export const prerender = false;
 ---
 <Layout title="Kickstarter projects">
-	<div>
-		{
-			page.map(project => (
-				<div class="project" data-id={project.id}>
-					<img src={project.imgs.sm} alt={project.name} />
-					<div class="info">
-						<h2>{project.name}</h2>
-						<p>{project.blurb}</p>
-						<a href={project.url}>{project.url}</a>
-					</div>
-				</div>
-			))
-			}
-			</div>
-			</Layout>
+    <div id="categories">
+        <button data-cat="all">All</button>
+      {
+        categories.map(c => (
+                <div>
+                    <span>{c.name}: </span>
+                  {
+                    c.sub?.map(s => (
+                            <button data-cat={s}>{s}</button>
+                    ))
+                  }
+                </div>
+        ))
+      }
+    </div>
+    <div id="cards" class="card-list"></div>
+    <button id="nextBtn" style="display: none">Next</button>
+</Layout>
+<Card/>
+<script>
+  let projects = [];
+  let index = 0;
+  const pageSize = 12;
 
+  function renderProjects() {
 
-			<style>
-				.project {
-					display: flex;
-					margin-bottom: 20px;
-				}
+    const cards = document.querySelector('#cards');
+    projects.slice(index, index + pageSize).forEach(p => {
+      const card = document.createElement('my-card');
+      card.setAttribute('name', p.name);
+      card.setAttribute('blurb', p.blurb);
+      card.setAttribute('img', p.imgs.full);
+      card.setAttribute('url', p.url);
+      cards.appendChild(card);
+    });
 
-				img {
-					margin-right: 20px;
-				}
+    const nextBtn = document.querySelector('#nextBtn');
+    nextBtn.style.display = 'block';
+    index += pageSize;
+  }
 
-				.info {
-					flex: 1;
-				}
+  const btns = document.querySelectorAll('button[data-cat]');
+  btns.forEach(btn => {
 
-				button {
-					width: 100%;
-				}
-			</style>
+    btn.addEventListener('click', (e) => {
+      const cat = e.target.dataset.cat;
+      document.querySelector('#categories').remove();
+      fetch('/buyableProjects.json')
+          .then(res => res.json())
+          .then(data => {
+            projects = data.sort(() => Math.random() - 0.5);
+            if (cat !== 'all') {
+              projects = projects.filter(p => p.cat2 === cat);
+            }
+            renderProjects();
+          });
+    });
+  });
+
+  const nextBtn = document.querySelector('#nextBtn');
+  nextBtn.addEventListener('click', () => {
+    const cards = document.querySelector('#cards');
+    cards.innerHTML = '';
+    renderProjects();
+  });
+</script>
+
+<style>
+    .project {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    img {
+        margin-right: 20px;
+    }
+
+    .info {
+        flex: 1;
+    }
+
+    button {
+        width: 100%;
+    }
+</style>
