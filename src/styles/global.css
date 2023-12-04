@@ -11,18 +11,20 @@ a {
     border: 1px solid black;
     border-radius: 5px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .card-image {
-    height: 200px;
+
     background-color: #ccc;
     background-size: cover;
     background-position: center;
 }
 
 .card-image img {
-    height: 100%;
-    object-fit: contain;
+    height: auto;
+    width: 300px;
+    object-fit: cover;
 }
 
 .card-header {

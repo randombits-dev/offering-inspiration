@@ -1,63 +1,88 @@
 import fs from 'fs';
+import readline from 'readline';
 
-const buyable = JSON.parse(fs.readFileSync("src/data/buyable.json", 'utf8'));
-const buyMap = {};
-buyable.forEach(s => buyMap[s.id] = s);
+const ignoredUrls = JSON.parse(fs.readFileSync("src/data/ignoreUrls.json", 'utf8'));
 
-const data = fs.readFileSync('raw/Kickstarter_2023-11-16T03_20_10_045Z.json', 'utf8');
-const lines = data.split('\n');
-
-const projects = [];
-const projectsWithUrl = [];
+const files = fs.readdirSync('X:/Kick');
 const categories = {};
-const buyableProjects = [];
+const categories2 = {};
+const seen = new Set();
 
-lines.forEach((line) => {
-  try {
-    const project = JSON.parse(line);
-    const data = project.data;
-    if (data.state === 'successful') {
+for await (const file of files) {
+  // if (file.indexOf('Kickstarter_2023') !== 0) continue;
+  const fileStream = fs.createReadStream(`X:/Kick/${file}`);
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
 
-      const item = {
-        id: data.id,
-        name: data.name,
-        blurb: data.blurb,
-        url: data.profile.link_url,
-        cat: data.category.parent_name,
-        cat2: data.category.name,
-        funded: data.deadline,
-        pledged: data.usd_pledged,
-        backers: data.backers_count,
-        imgs: {
-          full: data.photo.full,
-          sm: data.photo.little
+  for await (const line of rl) {
+    try {
+      const project = JSON.parse(line);
+
+      const data = project.data;
+      if (seen.has(data.id)) {
+        continue;
+      }
+      seen.add(data.id);
+      if (data.state === 'successful') {
+
+        const cat = data.category.parent_name || 'none';
+        const cat2 = data.category.name || 'none';
+
+        const item = {
+          id: data.id,
+          name: data.name,
+          blurb: data.blurb,
+          url: data.profile.link_url,
+          // cat: data.category.parent_name,
+          // cat2: data.category.name,
+          // funded: data.deadline,
+          // pledged: data.usd_pledged,
+          // backers: data.backers_count,
+          imgs: {
+            med: data.photo.med
+          }
+        };
+
+
+        if (item.url) {
+          const match = ignoredUrls.find(url => item.url.indexOf(url) > -1);
+          if (!match) {
+            if (!categories[cat]) {
+              categories[cat] = {};
+            }
+            if (!categories2[cat2]) {
+              categories2[cat2] = [];
+            }
+            categories2[cat2].push(item);
+            categories[cat][cat2] = categories2[cat2];
+          }
         }
-      };
-      projects.push(item);
 
-      if (data.profile.link_url) {
-        projectsWithUrl.push(item);
-      }
 
-      if (!categories[item.cat]) {
-        categories[item.cat] = new Set();
       }
-      categories[item.cat].add(item.cat2);
-
-      if (buyMap[item.id]) {
-        buyableProjects.push({...item, ...buyMap[item.id]});
-      }
+    } catch (e) {
+      console.log('Error parsing JSON', e);
     }
-  } catch (e) {
-    console.log('Error parsing JSON', e);
   }
+}
+
+const catOut = Object.entries(categories).filter(([key, value]) => key && key !== 'none').map(([key, value]) => {
+  const sub = Object.entries(value).map(([key2, value2]) => {
+    try {
+      fs.mkdirSync(`public/${key}`);
+    } catch (e) {
+      // ignore
+    }
+    fs.writeFileSync(`public/${key}/${key2}.json`, JSON.stringify(value2));
+    return key2;
+  });
+  return {name: key, sub};
 });
 
-const catOut = Object.entries(categories).map(([key, value]) => {
-  return {name: key, sub: new Array(...value)};
-});
+if (categories2['none']) {
+  fs.writeFileSync('public/none.json', JSON.stringify(categories2['none']));
+}
 
 fs.writeFileSync('src/data/categories.json', JSON.stringify(catOut));
-fs.writeFileSync('src/data/projects.json', JSON.stringify(projects));
-fs.writeFileSync('src/data/projectsWithUrl.json', JSON.stringify(projectsWithUrl));
-fs.writeFileSync('src/data/buyableProjects.json', JSON.stringify(buyableProjects));

@@ -5,14 +5,14 @@ import Card from "../components/Card.astro";
 ---
 <Layout title="Kickstarter projects">
     <div id="categories">
-        <button data-cat="all">All</button>
+        <!--<button data-cat="all">All</button>-->
       {
         categories.map(c => (
                 <div>
                     <span>{c.name}: </span>
                   {
                     c.sub?.map(s => (
-                            <button data-cat={s}>{s}</button>
+                            <button data-cat={c.name} data-cat2={s}>{s}</button>
                     ))
                   }
                 </div>
@@ -20,55 +20,54 @@ import Card from "../components/Card.astro";
       }
     </div>
     <div id="cards" class="card-list"></div>
-    <button id="nextBtn" style="display: none">Next</button>
 </Layout>
 <Card/>
 <script>
   let projects = [];
-  let index = 0;
-  const pageSize = 12;
+      let index = 0;
+      const pageSize = 12;
 
-  function renderProjects() {
+      function renderProjects() {
 
-    const cards = document.querySelector('#cards');
-    projects.slice(index, index + pageSize).forEach(p => {
-      const card = document.createElement('my-card');
-      card.setAttribute('name', p.name);
-      card.setAttribute('blurb', p.blurb);
-      card.setAttribute('img', p.imgs.full);
-      card.setAttribute('url', p.url);
-      cards.appendChild(card);
-    });
+          const cards = document.querySelector('#cards');
+          projects.slice(index, index + pageSize).forEach(p => {
+              const card = document.createElement('my-card');
+              card.setAttribute('name', p.name);
+              card.setAttribute('blurb', p.blurb);
+              card.setAttribute('img', p.imgs.med);
+              card.setAttribute('url', p.url);
+              card.setAttribute('date', p.funded);
+              cards.appendChild(card);
+              });
+          
+          index += pageSize;
+          }
 
-    const nextBtn = document.querySelector('#nextBtn');
-    nextBtn.style.display = 'block';
-    index += pageSize;
-  }
+      const btns = document.querySelectorAll('button[data-cat]');
+      btns.forEach(btn => {
 
-  const btns = document.querySelectorAll('button[data-cat]');
-  btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const cat = e.target.dataset.cat;
+          const cat2 = e.target.dataset.cat2;
+          document.querySelector('#categories').remove();
+          fetch(`/${cat}/${cat2}.json`)
+              .then(res => res.json())
+              .then(data => {
+                projects = data.sort(() => Math.random() - 0.5);
+                renderProjects();
+                renderProjects();
+              });
+        });
+      });
 
-    btn.addEventListener('click', (e) => {
-      const cat = e.target.dataset.cat;
-      document.querySelector('#categories').remove();
-      fetch('/buyableProjects.json')
-          .then(res => res.json())
-          .then(data => {
-            projects = data.sort(() => Math.random() - 0.5);
-            if (cat !== 'all') {
-              projects = projects.filter(p => p.cat2 === cat);
-            }
-            renderProjects();
+
+      window.addEventListener('scroll', () => {
+          const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+          if(clientHeight + scrollTop >= scrollHeight - 50) {
+              renderProjects();
+              }
           });
-    });
-  });
-
-  const nextBtn = document.querySelector('#nextBtn');
-  nextBtn.addEventListener('click', () => {
-    const cards = document.querySelector('#cards');
-    cards.innerHTML = '';
-    renderProjects();
-  });
 </script>
 
 <style>
