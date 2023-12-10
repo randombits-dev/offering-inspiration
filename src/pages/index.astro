@@ -2,17 +2,18 @@
 import Layout from "../layouts/Layout.astro";
 import categories from "../data/categories.json";
 import Card from "../components/Card.astro";
+import Category from "../components/Category.astro";
 ---
 <Layout title="Kickstarter projects">
     <div id="categories">
         <!--<button data-cat="all">All</button>-->
       {
         categories.map(c => (
-                <div>
-                    <span>{c.name}: </span>
+                <div class="category">
+                    <div class="category-name">{c.name}</div>
                   {
-                    c.sub?.map(s => (
-                            <button data-cat={c.name} data-cat2={s}>{s}</button>
+                    c.sub?.map((s, index) => (
+                           <> {index > 0 && <>/</>} <button class="category-child" data-cat={c.name} data-cat2={s}>{s}</button></>
                     ))
                   }
                 </div>
@@ -22,6 +23,7 @@ import Card from "../components/Card.astro";
     <div id="cards" class="card-list"></div>
 </Layout>
 <Card/>
+<Category/>
 <script>
   let projects = [];
       let index = 0;
@@ -82,9 +84,5 @@ import Card from "../components/Card.astro";
 
     .info {
         flex: 1;
-    }
-
-    button {
-        width: 100%;
     }
 </style>
