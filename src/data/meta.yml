@@ -1,0 +1,35 @@
+Product Design:
+  cat: Design
+  sub: [ Product Design, Toys ]
+
+Technology:
+  cat: Technology
+  sub: [ 3D Printing, Camera Equipment, DIY Electronics, Fabrication Tools, Flight, Gadgets, Hardware, Robots, Sound, Wearables ]
+
+Gaming:
+  cat: Games
+  sub: [ Tabletop Games, Gaming Hardware, Playing Cards, Puzzles ]
+
+Fashion:
+  cat: Fashion
+  sub: [ Accessories, Apparel, Childrenswear, Couture, Footwear, Jewelry, Pet Fashion, Ready-to-wear ]
+
+Food:
+  cat: Food
+  sub: [ Bacon, Cookbooks, Drinks, Small Batch, Vegan ]
+
+Books:
+  cat: Publishing
+  sub: [ Academic, Anthologies, Art Books, Comedy, Fiction, Nonfiction, Calendars, Children's Books, Poetry, Young Adult ]
+
+Comics & Graphic Novels:
+  cat: Comics
+  sub: [ Anthologies, Comic Books, Graphic Novels ]
+
+Crafts:
+  cat: Crafts
+  sub: [ Candles, Crochet, DIY, Embroidery, Glass, Knitting, Pottery, Printing, Quilts, Stationery, Taxidermy, Weaving, Woodworking ]
+
+Photography:
+  cat: Photography
+  sub: [ Animals, Fine Art, Nature, People, Photobooks, Places ]

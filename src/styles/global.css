@@ -1,12 +1,34 @@
 body {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-    color: #eee;
+    /*font-family: 'Edu SA Beginner', sans-serif;*/
+    /*font-family: 'Poiret One', cursive;*/
+    font-family: 'League Spartan', sans-serif;
+    background: #eee;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 a {
     color: inherit;
     text-decoration: none;
+}
+
+p {
+    font-size: 1.1rem;
+    /*font-family: 'Edu SA Beginner', sans-serif;*/
+}
+
+h1 {
+    margin: 40px 0;
+    font-size: 1.5rem;
+    /*font-family: 'Londrina Solid', cursive;*/
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
 }
 
 .card {
@@ -35,7 +57,7 @@ a {
 
 .card-header {
     padding: 10px;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
@@ -51,20 +73,28 @@ a {
     gap: 10px;
 }
 
-.category {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    border: 1px solid #eee;
-    margin-bottom: 20px;
+.categories {
+    margin-top: 20px;
 }
 
 .category-name {
-    background-color: #eee;
-    color: #13151a;
+    display: inline-block;
+    background-color: inherit;
+    color: inherit;
     font-size: 24px;
     padding: 10px 20px;
-    margin-right: 10px;
+    border: 2px solid #333;
+    border-radius: 20px;
+    margin: 10px;
+    /*font-weight: bold;*/
+    font-family: 'Edu SA Beginner', sans-serif;
+}
+
+.category-name:hover {
+    /*text-decoration: underline;*/
+    background-color: #333;
+    color: #eee;
+    cursor: pointer;
 }
 
 .category-child {
@@ -80,4 +110,8 @@ a {
 
 .category-child:hover {
     text-decoration: underline;
+}
+
+button {
+    font-family: inherit;
 }

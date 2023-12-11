@@ -1,88 +1,71 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import categories from "../data/categories.json";
 import Card from "../components/Card.astro";
 import Category from "../components/Category.astro";
+import {parse, stringify} from 'yaml';
+import Faq from "../components/Faq.astro";
+
+const metaraw = await Astro.glob('../data/meta.yml');
+const meta = metaraw[0].default;
+const categories = Object.keys(meta);
 ---
 <Layout title="Kickstarter projects">
-    <div id="categories">
-        <!--<button data-cat="all">All</button>-->
-      {
-        categories.map(c => (
-                <div class="category">
-                    <div class="category-name">{c.name}</div>
-                  {
-                    c.sub?.map((s, index) => (
-                           <> {index > 0 && <>/</>} <button class="category-child" data-cat={c.name} data-cat2={s}>{s}</button></>
-                    ))
-                  }
-                </div>
-        ))
-      }
-    </div>
-    <div id="cards" class="card-list"></div>
-</Layout>
-<Card/>
-<Category/>
-<script>
-  let projects = [];
-      let index = 0;
-      const pageSize = 12;
 
-      function renderProjects() {
+    <div class="container">
 
-          const cards = document.querySelector('#cards');
-          projects.slice(index, index + pageSize).forEach(p => {
-              const card = document.createElement('my-card');
-              card.setAttribute('name', p.name);
-              card.setAttribute('blurb', p.blurb);
-              card.setAttribute('img', p.imgs.med);
-              card.setAttribute('url', p.url);
-              card.setAttribute('date', p.funded);
-              cards.appendChild(card);
-              });
-          
-          index += pageSize;
+        <div class="hero">
+            <div class="hero-text-1">Offering Inspiration</div>
+            <div class="hero-text-2">a non-biased gift idea site</div>
+        </div>
+        <div class="choose">Choose a category to get started</div>
+
+        <div class="categories">
+            <!--<button data-cat="all">All</button>-->
+          {
+            categories.map(c => (
+                    <a class="category-name" href={`/${c}`} data-cat={c}>{c}</a>
+            ))
           }
+        </div>
 
-      const btns = document.querySelectorAll('button[data-cat]');
-      btns.forEach(btn => {
+        <!--<div class="hero-text-2">FAQ</div>-->
+        <Faq/>
+    </div>
 
-        btn.addEventListener('click', (e) => {
-          const cat = e.target.dataset.cat;
-          const cat2 = e.target.dataset.cat2;
-          document.querySelector('#categories').remove();
-          fetch(`/${cat}/${cat2}.json`)
-              .then(res => res.json())
-              .then(data => {
-                projects = data.sort(() => Math.random() - 0.5);
-                renderProjects();
-                renderProjects();
-              });
-        });
-      });
-
-
-      window.addEventListener('scroll', () => {
-          const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-          if(clientHeight + scrollTop >= scrollHeight - 50) {
-              renderProjects();
-              }
-          });
-</script>
+</Layout>
 
 <style>
-    .project {
-        display: flex;
-        margin-bottom: 20px;
+
+    .hero {
+        text-align: justify;
     }
 
-    img {
-        margin-right: 20px;
+    .bold {
+        font-weight: bold;
     }
 
-    .info {
-        flex: 1;
+    .hero-text-1 {
+        margin-top: 150px;
+        font-size: 5rem;
+        margin-bottom: 0;
+        font-family: 'Poiret One', cursive;
+        text-align: right;
+        letter-spacing: 6px;
+        font-weight: bold;
     }
+
+    .hero-text-2 {
+        font-family: 'Poiret One', cursive;
+        text-align: right;
+        //font-family: 'Londrina Solid', cursive;
+        font-size: 3rem;
+    }
+
+    .choose {
+        //font-family: 'Edu SA Beginner', sans-serif;
+        font-size: 1.5rem;
+        margin-top: 50px;
+    }
+
+
 </style>
