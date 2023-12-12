@@ -8,7 +8,7 @@ const TEMPLATE = `
   </div>
 `;
 
-export default class Card extends HTMLElement {
+export class Card extends HTMLElement {
   connectedCallback() {
     this.innerHTML = TEMPLATE;
     this.querySelector('.card-image')!.innerHTML = `<img src="${this.getAttribute('img')}"/>`;
@@ -19,3 +19,5 @@ export default class Card extends HTMLElement {
     });
   }
 }
+
+customElements.define('project-card', Card);

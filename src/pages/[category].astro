@@ -15,11 +15,7 @@ const {category} = Astro.params;
 </Layout>
 
 <script>
-  import {CategoryProjects} from '../components/Category';
-  import Card from '../components/Card';
-  import ReportMenu from '../components/ReportMenu';
-
-  customElements.define('category-projects', CategoryProjects);
-  customElements.define('project-card', Card);
-  customElements.define('report-menu', ReportMenu);
+  import '../components/Category';
+  import '../components/Card';
+  import '../components/ReportMenu';
 </script>

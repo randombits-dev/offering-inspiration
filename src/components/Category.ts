@@ -1,36 +1,12 @@
 const TEMPLATE = `
-<style>
-    .title {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: #eee;
-      border-bottom: 2px solid #333;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      font-family: 'Edu SA Beginner', sans-serif;
-    }
-    
-    .title-cat {
-      font-size: 2rem;
-      font-weight: bold;
-      padding: 0.5rem 2rem;
-    }
-    
-    .title-total, .title-percent {
-      font-size: 1.5rem;
-      padding: 0.5rem 2rem;
-    }
-</style>
-    <div class="title">
-      <div class="title-cat"></div>
-      <div class="title-percent"></div>
-      <div class="title-total"></div>
-    </div>
-      <div class="card-list"></div>
-  `;
+  <div class="title">
+    <a href="/"><img class="icon" src="/logo.svg"/></a>
+    <div class="title-cat"></div>
+    <div class="title-percent"></div>
+    <div class="title-total"></div>
+  </div>
+    <div class="card-list"></div>
+`;
 
 export class CategoryProjects extends HTMLElement {
   constructor() {
@@ -84,3 +60,5 @@ export class CategoryProjects extends HTMLElement {
     });
   }
 }
+
+customElements.define('category-projects', CategoryProjects);

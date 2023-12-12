@@ -1,6 +1,4 @@
 body {
-    /*font-family: 'Edu SA Beginner', sans-serif;*/
-    /*font-family: 'Poiret One', cursive;*/
     font-family: 'League Spartan', sans-serif;
     background: #eee;
     color: #333;
@@ -15,13 +13,12 @@ a {
 
 p {
     font-size: 1.1rem;
-    /*font-family: 'Edu SA Beginner', sans-serif;*/
+    line-height: 1.2rem;
 }
 
 h1 {
     margin: 40px 0;
-    font-size: 1.5rem;
-    /*font-family: 'Londrina Solid', cursive;*/
+    font-size: 1.3rem;
 }
 
 .container {
@@ -105,10 +102,6 @@ report-menu.show .card-report-menu {
     display: block;
 }
 
-
-/*.card:hover .card-report {*/
-/*    visibility: visible;*/
-/*}*/
 .card-list {
     max-width: 1300px;
     margin: 0 auto;
@@ -161,4 +154,37 @@ report-menu.show .card-report-menu {
 
 button {
     font-family: inherit;
+}
+
+.title {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #eee;
+    border-bottom: 2px solid #333;
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: 'Edu SA Beginner', sans-serif;
+}
+
+.title-cat {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0.5rem 2rem;
+}
+
+.title-total, .title-percent {
+    font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.icon {
+    height: 2rem;
+    margin-left: 1rem;
+    width: 2rem;
+    flex: 0 0 auto;
 }

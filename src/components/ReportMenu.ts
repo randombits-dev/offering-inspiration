@@ -12,7 +12,7 @@ const TEMPLATE = `
   </div>
 `;
 
-export default class ReportMenu extends HTMLElement {
+export class ReportMenu extends HTMLElement {
   clickListener = (e: MouseEvent) => {
     e.stopPropagation();
     const target = e.target as HTMLElement;
@@ -46,4 +46,7 @@ export default class ReportMenu extends HTMLElement {
     this.classList.toggle('show');
   }
 }
+
+customElements.define('report-menu', ReportMenu);
+
 
