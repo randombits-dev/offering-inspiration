@@ -13,22 +13,14 @@ const TEMPLATE = `
 `;
 
 export default class ReportMenu extends HTMLElement {
-  static get observedAttributes() {
-    return [];
-  }
-
-  doUpdate() {
-
-  }
-
-  clickListener = (e) => {
+  clickListener = (e: MouseEvent) => {
     e.stopPropagation();
     const target = e.target as HTMLElement;
     if (target.classList.contains('card-report-menu__item')) {
       if (target.dataset.report) {
         const card = target.closest('my-card');
         const id = card?.getAttribute('id');
-        void fetch(`https://gift-api.randombits.workers.dev`, {
+        void fetch(atob(`aHR0cHM6Ly9naWZ0LWFwaS5yYW5kb21iaXRzLndvcmtlcnMuZGV2`), {
           method: 'PUT',
           body: JSON.stringify({
             id,
@@ -47,16 +39,11 @@ export default class ReportMenu extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = TEMPLATE;
-    this.doUpdate();
     this.addEventListener('click', this.clickListener);
   }
 
   toggle() {
     this.classList.toggle('show');
-  }
-
-  attributeChangedCallback() {
-    // this.style.display = this.hasAttribute('show') ? 'block' : 'none';
   }
 }
 

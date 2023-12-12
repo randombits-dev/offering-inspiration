@@ -1,15 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Category from "../components/Category.astro";
-import {parse, stringify} from 'yaml';
 import Faq from "../components/Faq.astro";
 
 const metaraw = await Astro.glob('../data/meta.yml');
 const meta = metaraw[0].default;
 const categories = Object.keys(meta);
 ---
-<Layout title="Kickstarter projects">
+<Layout title="Offering Inspiration - A non-biased gift idea site"
+        description="Find a unique gift from successful kickstarter campgains.">
 
     <div class="container">
 
