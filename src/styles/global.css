@@ -1,9 +1,10 @@
 body {
     font-family: 'League Spartan', sans-serif;
-    background: #eee;
+    /*background: #eee;*/
     color: #333;
     margin: 0;
     padding: 0;
+    background-image: linear-gradient(to left top, rgb(207, 250, 254), rgb(253, 242, 248))
 }
 
 a {
@@ -36,6 +37,7 @@ h1 {
     overflow: hidden;
     cursor: pointer;
     height: 100%;
+    background-color: #fafafa;
 }
 
 .card-image {
@@ -160,13 +162,13 @@ button {
     position: sticky;
     top: 0;
     z-index: 1;
-    background: #eee;
     border-bottom: 2px solid #333;
     display: flex;
     /*justify-content: space-between;*/
     align-items: center;
     margin-bottom: 1rem;
     font-family: 'Edu SA Beginner', sans-serif;
+    background-color: #fafafa;
 }
 
 .title-cat {
@@ -187,4 +189,26 @@ button {
     margin-left: 1rem;
     width: 2rem;
     flex: 0 0 auto;
+}
+
+.social-links {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links a {
+    text-decoration: none;
+    padding: 0 20px;
+    fill: #eee;
+}
+
+.social-links svg:hover {
+    scale: 1.1;
+}
+
+.social-links svg {
+    width: 32px;
+    height: 32px;
 }

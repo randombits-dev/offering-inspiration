@@ -1,10 +1,10 @@
-# The problem with e-commerce sites
+# The problem
 
 Major E-commerce sites have a ton of products, but it's hard to find something unique. They are optimized to show you the most popular products, which means you will see the same products over and over again.
 
 # How is this site different?
 
-This site gives you a random list of products, not sorted by anything. Therefore, all products have an equal chance of being discovered.
+This site gives you a random list of products, without sorting of any kind. Therefore, all products have an equal chance of being discovered.
 
 # The Data
 
