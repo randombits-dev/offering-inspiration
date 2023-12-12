@@ -70,6 +70,7 @@ const {category} = Astro.params;
         const cardList = document.querySelector('.card-list');
         projects.slice(index, index + pageSize).forEach(p => {
           const card = document.createElement('my-card');
+          card.setAttribute('id', p.id);
           card.setAttribute('name', p.name);
           card.setAttribute('blurb', p.blurb);
           card.setAttribute('img', p.imgs.med);
