@@ -10,14 +10,16 @@ This site gives you a random list of products, without sorting of any kind. Ther
 
 The data was compiled from successful projects on Kickstarter that have external links to where the product is now for sale.
 
-Certain categories were excluded from the data set. Categories that contained mostly digital assets (like video games) and categories that contained mostly services (like a business) were excluded.
+Certain categories were excluded from the data set. Categories that contained mostly digital assets (like video games or music) and categories that contained mostly services (like a business) were excluded.
 
 I plan to add more data sources in the future.
 
 # Reporting products that are not purchasable
 
-Some product websites have been taken down over the years, so you will encounter broken links now and then.
+While I did run scripts on the data to try and remove as many invalid products as possible, there will still be some problems.
 
 Some products are just not purchasable, like an event, or a service.
+
+Other products may be no longer for sale, or the links may be invalid.
 
 If you find any problems, please click the "report" button on the product.

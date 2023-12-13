@@ -40,9 +40,7 @@ for await (const file of files) {
           // funded: data.deadline,
           // pledged: data.usd_pledged,
           // backers: data.backers_count,
-          imgs: {
-            med: data.photo.med
-          }
+          img: data.photo.ed
         };
 
 

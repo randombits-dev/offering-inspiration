@@ -27,7 +27,7 @@ export class CategoryProjects extends HTMLElement {
         card.setAttribute('id', p.id);
         card.setAttribute('name', p.name);
         card.setAttribute('blurb', p.blurb);
-        card.setAttribute('img', p.imgs.med);
+        card.setAttribute('img', p.img);
         card.setAttribute('url', p.url);
         card.setAttribute('date', p.funded);
         cardList.appendChild(card);

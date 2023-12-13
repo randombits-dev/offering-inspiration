@@ -18,7 +18,7 @@ export class ReportMenu extends HTMLElement {
     const target = e.target as HTMLElement;
     if (target.classList.contains('card-report-menu__item')) {
       if (target.dataset.report) {
-        const card = target.closest('my-card');
+        const card = target.closest('project-card');
         const id = card?.getAttribute('id');
         void fetch(atob(`aHR0cHM6Ly9naWZ0LWFwaS5yYW5kb21iaXRzLndvcmtlcnMuZGV2`), {
           method: 'PUT',
