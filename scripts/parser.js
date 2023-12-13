@@ -1,7 +1,7 @@
 import fs from 'fs';
 import readline from 'readline';
 
-const ignoredUrls = JSON.parse(fs.readFileSync("src/data/ignoreUrls.json", 'utf8'));
+const ignoredUrls = JSON.parse(fs.readFileSync("data/ignoreUrls.json", 'utf8'));
 
 const files = fs.readdirSync('X:/Kick');
 const categories = {};
@@ -69,18 +69,18 @@ for await (const file of files) {
 const catOut = Object.entries(categories).filter(([key, value]) => key && key !== 'none').map(([key, value]) => {
   const sub = Object.entries(value).map(([key2, value2]) => {
     try {
-      fs.mkdirSync(`public/${key}`);
+      fs.mkdirSync(`data/${key}`);
     } catch (e) {
       // ignore
     }
-    fs.writeFileSync(`public/${key}/${key2}.json`, JSON.stringify(value2));
+    fs.writeFileSync(`data/${key}/${key2}.json`, JSON.stringify(value2));
     return key2;
   });
   return {name: key, sub};
 });
 
 if (categories2['none']) {
-  fs.writeFileSync('public/none.json', JSON.stringify(categories2['none']));
+  fs.writeFileSync('data/none.json', JSON.stringify(categories2['none']));
 }
 
-fs.writeFileSync('src/data/categories.json', JSON.stringify(catOut));
+fs.writeFileSync('data/categories.json', JSON.stringify(catOut));

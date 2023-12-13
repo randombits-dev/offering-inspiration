@@ -73,7 +73,7 @@ const queueExecuter = (projectsToCheck) => {
 };
 
 const handleCategory = async (cat, value) => {
-  const filesToRead = value.sub.map(sub => `public/${value.cat}/${sub}.json`);
+  const filesToRead = value.sub.map(sub => `data/${value.cat}/${sub}.json`);
   const queue = [];
   const autoAccept = [];
   filesToRead.forEach(file => {
@@ -89,7 +89,7 @@ const handleCategory = async (cat, value) => {
   });
   const {valid, bad} = await queueExecuter(queue);
   fs.writeFileSync(`public/Merged/${cat}.json`, JSON.stringify([...valid, ...autoAccept]));
-  fs.writeFileSync(`public/Bad/${cat}.json`, JSON.stringify(bad));
+  fs.writeFileSync(`data/Bad/${cat}.json`, JSON.stringify(bad));
 };
 
 for (const [key, value] of Object.entries(meta)) {
