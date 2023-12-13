@@ -1,6 +1,9 @@
+html, body {
+    overflow-x: clip;
+}
+
 body {
     font-family: 'League Spartan', sans-serif;
-    /*background: #eee;*/
     color: #333;
     margin: 0;
     padding: 0;
@@ -211,4 +214,8 @@ button {
 .social-links svg {
     width: 32px;
     height: 32px;
+}
+
+#nextPage {
+    height: 50px;
 }

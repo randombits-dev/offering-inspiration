@@ -6,6 +6,7 @@ const TEMPLATE = `
     <div class="title-total"></div>
   </div>
     <div class="card-list"></div>
+    <div id="nextPage"></div>
 `;
 
 export class CategoryProjects extends HTMLElement {
@@ -53,11 +54,20 @@ export class CategoryProjects extends HTMLElement {
       const percent = scrollTop / (scrollHeight - clientHeight);
       const itemPercent = Math.round(percent * Math.min(index, projects.length) / projects.length * 100);
       this.querySelector('.title-percent')!.innerHTML = itemPercent + '% viewed';
-
-      if (clientHeight + scrollTop >= scrollHeight - 50) {
-        renderProjects();
-      }
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          renderProjects();
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    });
+    observer.observe(this.querySelector('#nextPage')!);
   }
 }
 
