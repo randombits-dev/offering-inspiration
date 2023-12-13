@@ -88,9 +88,9 @@ const twitterSVG = await fetch('https://storage.googleapis.com/randombits/images
         font-size: 5rem;
         margin-bottom: 0;
         font-family: 'Poiret One', cursive;
-        text-align: right;
         letter-spacing: 6px;
         font-weight: bold;
+        text-align: right;
     }
 
     .hero-text-2 {
@@ -98,6 +98,30 @@ const twitterSVG = await fetch('https://storage.googleapis.com/randombits/images
         text-align: right;
         margin-right: 10px;
         font-size: 3rem;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .hero-text-1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        .hero-text-2 {
+            font-size: 2rem;
+            text-align: center;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .hero-text-1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        .hero-text-2 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
     }
 
     .choose {
