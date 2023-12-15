@@ -1,71 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
+import Footer from "../layouts/Footer.astro";
 
 const metaraw = await Astro.glob('../data/meta.yml');
 const meta = metaraw[0].default;
 const categories = Object.keys(meta);
-
-const githubSVG = await fetch('https://storage.googleapis.com/randombits/images/github.svg');
-const discordSVG = await fetch('https://storage.googleapis.com/randombits/images/discord.svg');
-const twitterSVG = await fetch('https://storage.googleapis.com/randombits/images/x.svg');
 ---
 <Layout title="Offering Inspiration - A non-biased gift idea site"
         description="Find a unique gift from successful kickstarter campgains.">
 
     <div class="container">
+        <div class="text-center">
+            <div>
+                <img class="hero-logo" src="/logo.svg"/>
+            </div>
+            <div class="hero">
+                <div class="hero-text-1">Offering Inspiration</div>
+                <div class="hero-text-2">a non-biased gift idea site</div>
+            </div>
+            <div class="choose">Choose a category to get started</div>
 
-        <div>
-            <img class="hero-logo" src="/logo.svg"/>
+            <div class="categories">
+              {
+                categories.map(c => (
+                        <a class="category-name" href={`/${c}`} data-cat={c}>{c}</a>
+                ))
+              }
+            </div>
         </div>
-        <div class="hero">
-            <div class="hero-text-1">Offering Inspiration</div>
-            <div class="hero-text-2">a non-biased gift idea site</div>
-        </div>
-        <div class="choose">Choose a category to get started</div>
+        <Faq categories={meta}/>
 
-        <div class="categories">
-            <!--<button data-cat="all">All</button>-->
-          {
-            categories.map(c => (
-                    <a class="category-name" href={`/${c}`} data-cat={c}>{c}</a>
-            ))
-          }
-        </div>
 
-        <!--<div class="hero-text-2">FAQ</div>-->
-        <Faq/>
     </div>
 
-    <footer>
-        <div class="footer-content">
-
-            <a class="footer-section footer-logo">
-                <!--<img src="/logo-dark.svg" alt="logo" width="100"/>-->
-                <a href="https://randombits.dev" class="brought">
-                    <img src="https://storage.googleapis.com/randombits/images/logo2.png" alt="random bits logo"
-                         width="100"/>
-                    <div>
-                    <div>Brought to you by</div>
-                    <div class="rb">Random Bits</div>
-                    </div>
-                </a>
-
-                <div class="social-links">
-                    <a href="https://twitter.com/RandomBitsDev">
-                        <div set:html={twitterSVG}/>
-                    </a>
-                    <a href="https://discord.gg/Kv9SZw4G">
-                        <div set:html={discordSVG}/>
-                    </a>
-                    <a href="https://github.com/randombits-dev/offering-inspiration">
-                        <div set:html={githubSVG}/>
-                    </a>
-                </div>
-
-            </div>
-
-    </footer>
+    <Footer/>
 </Layout>
 
 <style>
@@ -129,38 +98,4 @@ const twitterSVG = await fetch('https://storage.googleapis.com/randombits/images
         font-size: 1.5rem;
         margin-top: 50px;
     }
-
-    footer {
-        background-color: #333;
-        color: #eee;
-    }
-
-    .footer-content {
-        padding: 50px 0;
-        text-align: center;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .footer-content img {
-        width: 75px;
-        border-radius: 50px;
-        margin-right: 20px;
-    }
-
-    .brought {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        text-align: left;
-    }
-
-    .rb {
-        margin-top: 5px;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-
 </style>

@@ -1,9 +1,47 @@
 ---
 import FaqContent from '../snippets/about.md';
+import stats from '../data/stats.json';
+const {categories} = Astro.props;
 ---
 
 <div class="faq">
     <FaqContent/>
+
+    <h1>Static version of the data</h1>
+
+    <div>These pages contain all of the data, with no images, and no javascript</div>
+    <br/>
+  {
+    Object.keys(categories).map(c => (
+            <span><a class="category-name-lite" href={`/static/${c}`} data-cat={c}>{c}</a> / </span>
+    ))
+  }
+
+    <h1>Some Kickstarter Stats</h1>
+
+    After parsing and filtering the data, I came up with the following stats:
+
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Projects</th>
+            <th>Successful</th>
+            <th>Purchasable</th>
+        </tr>
+      {
+        Object.values(categories).map(c => {
+          const s = stats.find(s => s.name === c.cat);
+          return (
+                  <tr>
+                      <td>{s.name}</td>
+                      <td>{s.total}</td>
+                      <td>{s.successful + ' (' + (s.successful / s.total * 100).toFixed(0) + '%)'}</td>
+                      <td>{s.buyable + ' (' + (s.buyable / s.total * 100).toFixed(0) + '%)'}</td>
+                  </tr>);
+        })
+      }
+
+    </table>
 </div>
 
 <style>
@@ -13,4 +51,26 @@ import FaqContent from '../snippets/about.md';
         text-align: left;
     }
 
+    .category-name-lite {
+        display: inline-block;
+        padding: 5px;
+        font-weight: bold;
+    }
+
+    .category-name-lite:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        margin-top: 20px;
+    }
+
+    td, th {
+        padding: 3px 15px;
+        text-align: right;
+    }
+
+    td:first-child, th:first-child {
+        text-align: left;
+    }
 </style>

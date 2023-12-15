@@ -1,0 +1,22 @@
+.lite-card {
+    border-top: 1px solid #333;
+    cursor: pointer;
+}
+
+.lite-desc {
+    font-size: 24px;
+    padding: 20px 50px 30px;
+}
+
+.lite-card .card-header {
+    font-size: 18px;
+}
+
+.lite-card .card-body {
+    padding-top: 0;
+}
+
+body {
+    background-image: none !important;
+    background-color: #fafafa !important;
+}

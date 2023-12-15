@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Comics",
+    "total": 19517,
+    "successful": 12739,
+    "buyable": 1776
+  },
+  {
+    "name": "Food",
+    "total": 21382,
+    "successful": 4803,
+    "buyable": 322
+  },
+  {
+    "name": "Games",
+    "total": 44077,
+    "successful": 24639,
+    "buyable": 4586
+  },
+  {
+    "name": "Music",
+    "total": 47531,
+    "successful": 23495
+  },
+  {
+    "name": "Technology",
+    "total": 41928,
+    "successful": 8898,
+    "buyable": 1666
+  },
+  {
+    "name": "Film & Video",
+    "total": 53839,
+    "successful": 27368
+  },
+  {
+    "name": "Fashion",
+    "total": 22935,
+    "successful": 8350,
+    "buyable": 1860
+  },
+  {
+    "name": "Crafts",
+    "total": 6976,
+    "successful": 1713,
+    "buyable": 189
+  },
+  {
+    "name": "Design",
+    "total": 25093,
+    "successful": 15202,
+    "buyable": 3348
+  },
+  {
+    "name": "Photography",
+    "total": 7565,
+    "successful": 2470,
+    "buyable": 427
+  },
+  {
+    "name": "Art",
+    "total": 32529,
+    "successful": 15293
+  },
+  {
+    "name": "Publishing",
+    "total": 48351,
+    "successful": 21372,
+    "buyable": 2819
+  },
+  {
+    "name": "Journalism",
+    "total": 9485,
+    "successful": 1147
+  },
+  {
+    "name": "Theater",
+    "total": 11893,
+    "successful": 5008
+  },
+  {
+    "name": "Dance",
+    "total": 3092,
+    "successful": 1326
+  }
+]

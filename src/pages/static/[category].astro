@@ -1,0 +1,38 @@
+---
+import '../../styles/cat.css';
+import '../../styles/lite.css';
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../layouts/Footer.astro";
+export async function getStaticPaths() {
+  const metaraw = await Astro.glob('../../data/meta.yml');
+  const meta = metaraw[0].default;
+  return Object.keys(meta).map((category) => ({params: {category}}));
+}
+
+const {category} = Astro.params;
+
+const {default: projects} = await import(`../../../public/Merged/${category}.json`);
+---
+
+<Layout title={`Offering Inspiration - ${category}`} description={`Find a unique gift from the ${category} category`}
+        xmlns="">
+    <div class="title">
+        <a href="/"><img class="icon" src="/logo.svg"/></a>
+        <div class="title-cat">{category}</div>
+        <div class="title-total">{projects.length} items</div>
+    </div>
+    <div class="lite-desc">This is a list of all successful "{category}" Kickstarter projects in which the product is
+        purchasable.
+    </div>
+  {
+    projects.map(p => (
+            <lite-card name={p.name} blurb={p.blurb} url={p.url}/>
+    ))
+  }
+
+    <Footer/>
+</Layout>
+
+<script>
+  import '../../components/LiteCard';
+</script>
