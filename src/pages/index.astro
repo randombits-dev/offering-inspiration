@@ -12,13 +12,13 @@ const categories = Object.keys(meta);
 
     <div class="container">
         <div class="text-center">
-            <div>
-                <!--<img class="hero-logo" src="/logo.svg"/>-->
-            </div>
             <div class="hero">
                 <div class="hero-text-1">Offering Inspiration</div>
+                <!--<div class="hero-text-2">a gift idea site</div>-->
+
             </div>
-            <div class="choose">Choose a category to get started</div>
+            <div class="choose">Gift ideas from successful Kickstarter projects.
+                <br><br>Choose a category to get started.</div>
 
             <div class="categories">
               {
@@ -63,9 +63,11 @@ const categories = Object.keys(meta);
 
     .hero-text-2 {
         font-family: 'Poiret One', cursive;
-        text-align: right;
+        text-align: center;
         margin-right: 10px;
-        font-size: 3rem;
+        margin-top: 10px;
+        letter-spacing: 5px;
+        font-size: 2rem;
     }
 
     @media screen and (max-width: 1000px) {
