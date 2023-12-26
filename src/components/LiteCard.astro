@@ -1,16 +1,19 @@
 ---
-const {name, blurb} = Astro.props;
+const {name, blurb, url} = Astro.props;
 ---
 
-<div class="lite-card">
+<div class="lite-card" data-url={url}>
     <div class="card-header">{name}</div>
     <div class="card-body">{blurb}</div>
 </div>
 
 <script>
-    document.querySelector('a').addEventListener('click', () => {
-        window.open(this.getAttribute('url')!, '_blank');
-    });
+    document.querySelectorAll('.lite-card').forEach(card =>{
+        card.addEventListener('click', (e) => {
+            const el = e.currentTarget as HTMLElement;
+            window.open(el.dataset.url, '_blank');
+        });
+    })
 </script>
 
 <style>
