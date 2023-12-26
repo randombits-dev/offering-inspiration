@@ -7,17 +7,16 @@ const metaraw = await Astro.glob('../data/meta.yml');
 const meta = metaraw[0].default;
 const categories = Object.keys(meta);
 ---
-<Layout title="Offering Inspiration - A non-biased gift idea site"
+<Layout title="Offering Inspiration - A gift idea site"
         description="Find a unique gift from successful kickstarter campgains.">
 
     <div class="container">
         <div class="text-center">
             <div>
-                <img class="hero-logo" src="/logo.svg"/>
+                <!--<img class="hero-logo" src="/logo.svg"/>-->
             </div>
             <div class="hero">
                 <div class="hero-text-1">Offering Inspiration</div>
-                <div class="hero-text-2">a non-biased gift idea site</div>
             </div>
             <div class="choose">Choose a category to get started</div>
 
@@ -54,12 +53,12 @@ const categories = Object.keys(meta);
 
     .hero-text-1 {
         margin-top: 50px;
-        font-size: 5rem;
+        font-size: 4rem;
         margin-bottom: 0;
         font-family: 'Poiret One', cursive;
         letter-spacing: 6px;
         font-weight: bold;
-        text-align: right;
+        text-align: center;
     }
 
     .hero-text-2 {
@@ -94,8 +93,7 @@ const categories = Object.keys(meta);
     }
 
     .choose {
-        //font-family: 'Edu SA Beginner', sans-serif;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         margin-top: 50px;
     }
 </style>

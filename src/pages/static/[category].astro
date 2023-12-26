@@ -1,8 +1,7 @@
 ---
-import '../../styles/cat.css';
-import '../../styles/lite.css';
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../layouts/Footer.astro";
+import LiteCard from "../../components/LiteCard.astro";
 export async function getStaticPaths() {
   const metaraw = await Astro.glob('../../data/meta.yml');
   const meta = metaraw[0].default;
@@ -10,29 +9,61 @@ export async function getStaticPaths() {
 }
 
 const {category} = Astro.params;
+const metaraw = await Astro.glob('../../data/meta.yml');
+const meta = metaraw[0].default;
+const categories = Object.keys(meta);
 
 const {default: projects} = await import(`../../../public/Merged/${category}.json`);
 ---
 
 <Layout title={`Offering Inspiration - ${category}`} description={`Find a unique gift from the ${category} category`}
         xmlns="">
-    <div class="title">
-        <a href="/"><img class="icon" src="/logo.svg"/></a>
-        <div class="title-cat">{category}</div>
-        <div class="title-total">{projects.length} items</div>
+    <div class="lite-header">
+    <a class="home" href="/"><img src="/logo.svg"/></a>
+    {
+        categories.map(c => {
+            return <>{
+                c === category ? <span>&nbsp;/&nbsp;<b>{c}</b></span> :
+                        <span>&nbsp;/&nbsp;<a class="category-name-lite" href={`/static/${c}`} data-cat={c}>{c}</a></span>
+            }</>
+        })
+    }
     </div>
-    <div class="lite-desc">This is a list of all successful "{category}" Kickstarter projects in which the product is
-        purchasable.
+    <div class="lite-desc">This is a list of all successful <b>{category}</b> Kickstarter projects in which the product is
+        purchasable. {projects.length} items total.
     </div>
   {
     projects.map(p => (
-            <lite-card name={p.name} blurb={p.blurb} url={p.url}/>
+            <LiteCard name={p.name} blurb={p.blurb} url={p.url}/>
     ))
   }
 
     <Footer/>
 </Layout>
 
-<script>
-  import '../../components/LiteCard';
-</script>
+<style>
+    .lite-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .lite-desc {
+        font-size: 1.2rem;
+        padding: 40px 50px 30px;
+    }
+
+    body {
+        background-image: none !important;
+        background-color: #fafafa !important;
+    }
+
+    .home {
+        margin: 10px 0 10px 20px;
+    }
+
+    img {
+        height: 25px;
+        margin-right: 10px;
+    }
+
+</style>

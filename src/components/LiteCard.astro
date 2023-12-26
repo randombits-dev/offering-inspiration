@@ -1,0 +1,32 @@
+---
+const {name, blurb} = Astro.props;
+---
+
+<div class="lite-card">
+    <div class="card-header">{name}</div>
+    <div class="card-body">{blurb}</div>
+</div>
+
+<script>
+    document.querySelector('a').addEventListener('click', () => {
+        window.open(this.getAttribute('url')!, '_blank');
+    });
+</script>
+
+<style>
+    .lite-card {
+        border-top: 1px solid #333;
+        cursor: pointer;
+    }
+
+    .card-header {
+        padding: 10px;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 0 10px 10px 10px;
+        flex-grow: 1;
+    }
+</style>

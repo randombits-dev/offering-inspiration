@@ -103,30 +103,7 @@ report-menu.show .card-report-menu {
 }
 
 
-.title {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    border-bottom: 2px solid #333;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-family: 'Inconsolata', sans-serif;
-    background-color: #fafafa;
-}
 
-.title-cat {
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 1rem 2rem;
-}
-
-.title-total, .title-percent {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    flex: 1 1 auto;
-    text-align: right;
-}
 
 .icon {
     height: 2rem;
