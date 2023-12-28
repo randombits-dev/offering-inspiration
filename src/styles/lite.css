@@ -1,0 +1,14 @@
+.lite-list > div {
+    border-top: 1px solid #333;
+    cursor: pointer;
+}
+
+.lite-list > div > div:first-child {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.lite-list > div > div:last-child {
+    padding: 0 10px 10px 10px;
+    flex-grow: 1;
+}

@@ -2,9 +2,9 @@
 const {name, blurb, url} = Astro.props;
 ---
 
-<div class="lite-card" data-url={url}>
-    <div class="card-header">{name}</div>
-    <div class="card-body">{blurb}</div>
+<div data-url={url}>
+    <div>{name}</div>
+    <div>{blurb}</div>
 </div>
 
 <script>
@@ -15,21 +15,3 @@ const {name, blurb, url} = Astro.props;
         });
     })
 </script>
-
-<style>
-    .lite-card {
-        border-top: 1px solid #333;
-        cursor: pointer;
-    }
-
-    .card-header {
-        padding: 10px;
-        font-size: 1.3em;
-        font-weight: bold;
-    }
-
-    .card-body {
-        padding: 0 10px 10px 10px;
-        flex-grow: 1;
-    }
-</style>
