@@ -26,6 +26,9 @@ const {title, description} = Astro.props;
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Poiret+One&family=League+Spartan&family=Inconsolata"/>
     <!--<script src="https://cdn.jsdelivr.net/npm/fontable@latest/dist/auto.js"></script>-->
+    <script>
+        navigator.serviceWorker.register("/sw.js")
+    </script>
 </head>
 <body>
 <slot/>
