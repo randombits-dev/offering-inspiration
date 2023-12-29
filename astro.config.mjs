@@ -5,6 +5,9 @@ import yaml from '@rollup/plugin-yaml';
 export default defineConfig({
   output: 'static',
   vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
     plugins: [yaml()]
   }
 });

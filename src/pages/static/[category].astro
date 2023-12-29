@@ -1,8 +1,8 @@
 ---
+import '../../styles/lite.css';
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../layouts/Footer.astro";
 import LiteCard from "../../components/LiteCard.astro";
-import '../../styles/lite.css';
 export async function getStaticPaths() {
   const metaraw = await Astro.glob('../../data/meta.yml');
   const meta = metaraw[0].default;
@@ -43,30 +43,3 @@ const {default: projects} = await import(`../../../public/Merged/${category}.jso
 
     <Footer/>
 </Layout>
-
-<style>
-    .lite-header {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .lite-desc {
-        font-size: 1.2rem;
-        padding: 40px 50px 30px;
-    }
-
-    body {
-        background-image: none !important;
-        background-color: #fafafa !important;
-    }
-
-    .home {
-        margin: 10px 0 10px 20px;
-    }
-
-    img {
-        height: 25px;
-        margin-right: 10px;
-    }
-
-</style>

@@ -11,17 +11,20 @@ const {categories} = Astro.props;
 
     <div>These pages contain all of the data, with no images, and no javascript</div>
     <br/>
+  <div class="faq__lite">
+
   {
     Object.keys(categories).map(c => (
-            <span><a class="category-name-lite" href={`/static/${c}`} data-cat={c}>{c}</a> / </span>
+            <><a href={`/static/${c}`} data-cat={c}>{c}</a> / </>
     ))
   }
+  </div>
 
     <h1>Some Kickstarter Stats</h1>
 
     After parsing and filtering the data, I came up with the following stats:
 
-    <table>
+    <table class="faq__stats">
         <tr>
             <th>Category</th>
             <th>Projects</th>
@@ -44,33 +47,33 @@ const {categories} = Astro.props;
     </table>
 </div>
 
-<style>
+<style is:global>
     .faq {
         max-width: 700px;
         margin: 100px auto;
         text-align: left;
     }
 
-    .category-name-lite {
+    .faq__lite a {
         display: inline-block;
         padding: 5px;
         font-weight: bold;
     }
 
-    .category-name-lite:hover {
+    .faq__lite a:hover {
         text-decoration: underline;
     }
 
-    table {
+    .faq__stats {
         margin-top: 20px;
     }
 
-    td, th {
+    .faq__stats td, .faq__stats th {
         padding: 3px 15px;
         text-align: right;
     }
 
-    td:first-child, th:first-child {
+    .faq__stats td:first-child, .faq__stats th:first-child {
         text-align: left;
     }
 </style>
