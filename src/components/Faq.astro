@@ -14,8 +14,8 @@ const {categories} = Astro.props;
   <div class="faq__lite">
 
   {
-    Object.keys(categories).map(c => (
-            <><a href={`/static/${c}`} data-cat={c}>{c}</a> / </>
+    Object.entries(categories).map(([id, cat]) => (
+            <><a href={`/static/${id}`}>{cat.name}</a> / </>
     ))
   }
   </div>

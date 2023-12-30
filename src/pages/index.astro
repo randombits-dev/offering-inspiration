@@ -5,7 +5,7 @@ import Footer from "../layouts/Footer.astro";
 
 const metaraw = await Astro.glob('../data/meta.yml');
 const meta = metaraw[0].default;
-const categories = Object.keys(meta);
+const categories = Object.entries(meta);
 ---
 <Layout title="Offering Inspiration - A gift idea site"
         description="Find a unique gift from successful kickstarter campgains.">
@@ -22,8 +22,8 @@ const categories = Object.keys(meta);
 
             <div class="categories">
               {
-                categories.map(c => (
-                        <a class="category-name" href={`/${c}`} data-cat={c}>{c}</a>
+                categories.map(([id, c]) => (
+                        <a class="category-name" href={`/${id}`}>{c.name}</a>
                 ))
               }
             </div>

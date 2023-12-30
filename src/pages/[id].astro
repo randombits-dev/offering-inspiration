@@ -4,15 +4,18 @@ import Layout from "../layouts/Layout.astro";
 export async function getStaticPaths() {
   const metaraw = await Astro.glob('../data/meta.yml');
   const meta = metaraw[0].default;
-  return Object.keys(meta).map((category) => ({params: {category}}));
+  return Object.keys(meta).map(id => ({params: {id}}));
 }
 
-const {category} = Astro.params;
+const {id} = Astro.params;
+const metaraw = await Astro.glob('../data/meta.yml');
+const meta = metaraw[0].default;
+const name = meta[id].name;
 ---
 
-<Layout title={`Offering Inspiration - ${category}`} description={`Find a unique gift from the ${category} category`}
+<Layout title={`Offering Inspiration - ${name}`} description={`Find a unique gift from the ${name} category`}
         xmlns="">
-    <category-projects cat={category}/>
+    <category-projects cat={name}/>
 </Layout>
 
 <script>

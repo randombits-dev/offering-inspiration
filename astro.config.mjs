@@ -9,5 +9,9 @@ export default defineConfig({
       assetsInlineLimit: 0,
     },
     plugins: [yaml()]
+  },
+  trailingSlash: 'never',
+  build: {
+    format: 'file'
   }
 });

@@ -6,31 +6,32 @@ import LiteCard from "../../components/LiteCard.astro";
 export async function getStaticPaths() {
   const metaraw = await Astro.glob('../../data/meta.yml');
   const meta = metaraw[0].default;
-  return Object.keys(meta).map((category) => ({params: {category}}));
+  return Object.keys(meta).map(id => ({params: {id}}));
 }
 
-const {category} = Astro.params;
+const {id} = Astro.params;
 const metaraw = await Astro.glob('../../data/meta.yml');
 const meta = metaraw[0].default;
-const categories = Object.keys(meta);
+const categories = Object.entries(meta);
+const {name} = meta[id];
 
-const {default: projects} = await import(`../../../public/Merged/${category}.json`);
+const {default: projects} = await import(`../../../public/Merged/${name}.json`);
 ---
 
-<Layout title={`Offering Inspiration - ${category}`} description={`Find a unique gift from the ${category} category`}
+<Layout title={`Offering Inspiration - ${name}`} description={`Find a unique gift from the ${name} category`}
         xmlns="">
     <div class="lite-header">
     <a class="home" href="/"><img src="/logo.svg"/></a>
     {
-        categories.map(c => {
+        categories.map(([listID, cat]) => {
             return <>{
-                c === category ? <span>&nbsp;/&nbsp;<b>{c}</b></span> :
-                        <span>&nbsp;/&nbsp;<a class="category-name-lite" href={`/static/${c}`} data-cat={c}>{c}</a></span>
+              listID === id ? <span>&nbsp;/&nbsp;<b>{cat.name}</b></span> :
+                        <span>&nbsp;/&nbsp;<a href={`/static/${listID}`}>{cat.name}</a></span>
             }</>
         })
     }
     </div>
-    <div class="lite-desc">This is a list of all successful <b>{category}</b> Kickstarter projects in which the product is
+    <div class="lite-desc">This is a list of all successful <b>{name}</b> Kickstarter projects in which the product is
         purchasable. {projects.length} items total.
     </div>
     <div class="lite-list">
