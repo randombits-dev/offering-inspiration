@@ -22,7 +22,7 @@ self.addEventListener('install', (event) => {
                 //[] of files to cache & if any of the file not present `addAll` will fail
                 return cache.addAll(precacheList.map(item => item.url))
                     .then(() => {
-                        console.info('All files are cached');
+                        console.debug('All files are cached');
                         return self.skipWaiting(); //To forces the waiting service worker to become the active service worker
                     })
                     .catch((error) => {
@@ -46,12 +46,12 @@ async function putInCache(request, response) {
 async function cacheFirst(request) {
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
-        console.log('Found in cache', request.url);
+        console.debug('Found in cache', request.url);
     }
     return cachedResponse || fetch(request)
     .then(res => {
         if (res.url.match(/\/Merged\/.*\.json$/)) {
-            console.log('Caching the response to', request.url);
+            console.debug('Caching the response to', request.url);
             putInCache(request, res.clone());
         }
       return res;
@@ -60,7 +60,7 @@ async function cacheFirst(request) {
 
 //Adding `activate` event listener
 self.addEventListener('activate', (event) => {
-    console.info('Event: Activate');
+    console.debug('Event: Activate');
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
@@ -72,7 +72,7 @@ self.addEventListener('activate', (event) => {
             );
         })
             .then(function () {
-                console.info("Old caches are cleared!");
+                console.debug("Old caches are cleared!");
                 // To tell the service worker to activate current one
                 // instead of waiting for the old one to finish.
                 return self.clients.claim();
