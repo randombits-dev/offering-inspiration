@@ -1,4 +1,4 @@
-import"./hoisted.d15bad76.js";const l=`
+import"./hoisted.xg8AAIAA.js";const l=`
   <div class="title">
     <a href="/"><img class="icon" src="/logo.svg"/></a>
     <div class="title-cat"></div>
