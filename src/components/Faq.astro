@@ -5,75 +5,89 @@ const {categories} = Astro.props;
 ---
 
 <div class="faq">
-    <FaqContent/>
+  <FaqContent/>
 
-    <h1>Static version of the data</h1>
+  <h1>Static version of the data</h1>
 
-    <div>These pages contain all of the data, with no images, and no javascript</div>
-    <br/>
-  <div class="faq__lite">
+  <div>These pages contain all of the data, with no images, and no javascript</div>
+  <br/>
+  <nav aria-label="Static Version of Pages" class="faq__lite">
 
-  {
-    Object.entries(categories).map(([id, cat]) => (
-            <><a href={`/static/${id}`}>{cat.name}</a> / </>
-    ))
-  }
-  </div>
+    {
+      Object.entries(categories).map(([id, cat]) => (
+        <><a href={`/static/${id}`}>{cat.name}</a> <span>/</span></>
+      ))
+    }
+  </nav>
 
-    <h1>Some Kickstarter Stats</h1>
+  <h1>Some Kickstarter Stats</h1>
 
-    After parsing and filtering the data, I came up with the following stats:
+  After parsing and filtering the data, I came up with the following stats:
 
-    <table class="faq__stats">
-        <tr>
-            <th>Category</th>
-            <th>Projects</th>
-            <th>Successful</th>
-            <th>Purchasable</th>
-        </tr>
+  <div class="faq__stats">
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Projects</th>
+        <th>Successful</th>
+        <th>Purchasable</th>
+      </tr>
       {
         Object.values(categories).map(c => {
           const s = stats.find(s => s.name === c.cat);
           return (
-                  <tr>
-                      <td>{s.name}</td>
-                      <td>{s.total}</td>
-                      <td>{s.successful + ' (' + (s.successful / s.total * 100).toFixed(0) + '%)'}</td>
-                      <td>{s.buyable + ' (' + (s.buyable / s.total * 100).toFixed(0) + '%)'}</td>
-                  </tr>);
+            <tr>
+              <td>{s.name}</td>
+              <td>{s.total}</td>
+              <td>{s.successful + ' (' + (s.successful / s.total * 100).toFixed(0) + '%)'}</td>
+              <td>{s.buyable + ' (' + (s.buyable / s.total * 100).toFixed(0) + '%)'}</td>
+            </tr>);
         })
       }
 
     </table>
+  </div>
 </div>
 
 <style is:global>
-    .faq {
-        max-width: 700px;
-        margin: 100px auto;
-        text-align: left;
-    }
+  .faq {
+    max-width: 700px;
+    margin: 100px auto;
+    text-align: left;
+  }
 
+  .faq__lite a {
+    display: inline-block;
+    padding: 5px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 600px) {
     .faq__lite a {
-        display: inline-block;
-        padding: 5px;
-        font-weight: bold;
+      display: block;
     }
 
-    .faq__lite a:hover {
-        text-decoration: underline;
+    .faq__lite span {
+      display: none;
     }
+  }
 
-    .faq__stats {
-        margin-top: 20px;
-    }
+  .faq__lite a:hover {
+    text-decoration: underline;
+  }
 
-    .faq__stats td, .faq__stats th {
-        padding: 3px 15px;
-        text-align: right;
-    }
+  .faq__stats {
+    width: 100%;
+    margin-top: 20px;
+    overflow-x: auto;
+  }
 
-    .faq__stats td:first-child, .faq__stats th:first-child {
-        text-align: left;
-    }
+  .faq__stats td, .faq__stats th {
+    padding: 3px 15px;
+    text-align: right;
+  }
+
+  .faq__stats td:first-child, .faq__stats th:first-child {
+    text-align: left;
+  }
 </style>

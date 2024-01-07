@@ -10,9 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.6.2",
-    "fs-extra": "^11.2.0",
+    "@astrojs/sitemap": "^3.0.4",
     "@rollup/plugin-yaml": "^4.1.2",
+    "astro": "^4.1.1",
+    "astro-robots": "^2.0.0",
+    "fs-extra": "^11.2.0",
     "readline": "^1.3.0",
     "yaml": "^2.3.4"
   }

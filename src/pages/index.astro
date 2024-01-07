@@ -8,117 +8,122 @@ const meta = metaraw[0].default;
 const categories = Object.entries(meta);
 ---
 <Layout title="Offering Inspiration - A gift idea site"
-        description="Find a unique gift from successful kickstarter campgains.">
-
+        description="Find a unique gifts from successful kickstarter campgains.">
+  <main>
     <div class="container">
-        <div class="text-center">
-            <div class="hero">
-                <div class="hero-text-1">Offering Inspiration</div>
-                <!--<div class="hero-text-2">a gift idea site</div>-->
-
-            </div>
-            <div class="choose">Gift ideas from successful Kickstarter projects.
-                <br><br>Choose a category to get started.</div>
-
-            <div class="categories">
-              {
-                categories.map(([id, c]) => (
-                        <a class="category-name" href={`/${id}`}>{c.name}</a>
-                ))
-              }
-            </div>
+      <div class="text-center">
+        <div class="hero">
+          <div class="hero-text-1">Offering Inspiration</div>
         </div>
-        <Faq categories={meta}/>
+        <div class="choose">Gift ideas from successful Kickstarter projects.
+          <br><br>Choose a category to get started.
+        </div>
+
+        <nav aria-label="Choose Category" class="categories">
+          {
+            categories.map(([id, c]) => (
+              <a class="category-name" href={`/${id}`}>{c.name}</a>
+            ))
+          }
+        </nav>
+      </div>
+      <Faq categories={meta}/>
 
 
     </div>
-
-    <Footer/>
+  </main>
+  <Footer/>
 </Layout>
 
 <style>
 
-    .hero {
-        text-align: justify;
-    }
+  .hero {
+    text-align: justify;
+  }
 
-    .bold {
-        font-weight: bold;
-    }
+  .bold {
+    font-weight: bold;
+  }
 
-    .hero-logo {
-        width: 200px;
-        margin-top: 100px;
-    }
+  .hero-logo {
+    width: 200px;
+    margin-top: 100px;
+  }
 
+  .hero-text-1 {
+    margin-top: 50px;
+    font-size: 4rem;
+    margin-bottom: 0;
+    font-family: 'Poiret One', cursive;
+    letter-spacing: 6px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .hero-text-2 {
+    font-family: 'Poiret One', cursive;
+    text-align: center;
+    margin-right: 10px;
+    margin-top: 10px;
+    letter-spacing: 5px;
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 1000px) {
     .hero-text-1 {
-        margin-top: 50px;
-        font-size: 4rem;
-        margin-bottom: 0;
-        font-family: 'Poiret One', cursive;
-        letter-spacing: 6px;
-        font-weight: bold;
-        text-align: center;
+      font-size: 3rem;
+      text-align: center;
     }
 
     .hero-text-2 {
-        font-family: 'Poiret One', cursive;
-        text-align: center;
-        margin-right: 10px;
-        margin-top: 10px;
-        letter-spacing: 5px;
-        font-size: 2rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .hero-text-1 {
+      font-size: 3rem;
+      text-align: center;
     }
 
-    @media screen and (max-width: 1000px) {
-        .hero-text-1 {
-            font-size: 3rem;
-            text-align: center;
-        }
-
-        .hero-text-2 {
-            font-size: 2rem;
-            text-align: center;
-        }
+    .hero-text-2 {
+      font-size: 1.5rem;
+      text-align: center;
     }
+  }
 
-    @media screen and (max-width: 600px) {
-        .hero-text-1 {
-            font-size: 3rem;
-            text-align: center;
-        }
+  .choose {
+    font-size: 1.3rem;
+    margin-top: 50px;
+  }
 
-        .hero-text-2 {
-            font-size: 1.5rem;
-            text-align: center;
-        }
+  .categories {
+    margin-top: 20px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .categories a {
+      display: block;
     }
+  }
 
-    .choose {
-        font-size: 1.3rem;
-        margin-top: 50px;
-    }
+  .category-name {
+    display: inline-block;
+    background-color: inherit;
+    color: inherit;
+    font-size: 20px;
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 20px;
+    margin: 10px;
+    font-weight: bold;
+    font-family: 'Inconsolata', sans-serif;
+  }
 
-    .categories {
-        margin-top: 20px;
-    }
-
-    .category-name {
-        display: inline-block;
-        background-color: inherit;
-        color: inherit;
-        font-size: 20px;
-        padding: 10px 20px;
-        border: 2px solid #333;
-        border-radius: 20px;
-        margin: 10px;
-        font-weight: bold;
-        font-family: 'Inconsolata', sans-serif;
-    }
-
-    .category-name:hover {
-        background-color: #333;
-        color: #eee;
-        cursor: pointer;
-    }
+  .category-name:hover {
+    background-color: #333;
+    color: #eee;
+    cursor: pointer;
+  }
 </style>

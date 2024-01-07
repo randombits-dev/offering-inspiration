@@ -20,27 +20,29 @@ const {default: projects} = await import(`../../../public/Merged/${name}.json`);
 
 <Layout title={`Offering Inspiration - ${name}`} description={`Find a unique gift from the ${name} category`}
         xmlns="">
+  <main>
     <div class="lite-header">
-    <a class="home" href="/"><img src="/logo.svg"/></a>
-    {
+      <a class="home" href="/"><img src="/logo.svg"/></a>
+      {
         categories.map(([listID, cat]) => {
-            return <>{
+          return;
+            <>{
               listID === id ? <span>&nbsp;/&nbsp;<b>{cat.name}</b></span> :
-                        <span>&nbsp;/&nbsp;<a href={`/static/${listID}`}>{cat.name}</a></span>
-            }</>
+                <span>&nbsp;/&nbsp;<a href={`/static/${listID}`}>{cat.name}</a></span>
+            }</>;
         })
-    }
+      }
     </div>
     <div class="lite-desc">This is a list of all successful <b>{name}</b> Kickstarter projects in which the product is
-        purchasable. {projects.length} items total.
+      purchasable. {projects.length} items total.
     </div>
     <div class="lite-list">
-  {
-    projects.map(p => (
-            <LiteCard name={p.name} blurb={p.blurb} url={p.url}/>
-    ))
-  }
+      {
+        projects.map(p => (
+          <LiteCard name={p.name} blurb={p.blurb} url={p.url}/>
+        ))
+      }
     </div>
-
-    <Footer/>
+  </main>
+  <Footer/>
 </Layout>

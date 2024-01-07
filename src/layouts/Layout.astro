@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import {removeTrailingSlash} from "../utils/utils";
 interface Props {
   title: string;
   description: string;
@@ -11,25 +12,27 @@ const {title, description} = Astro.props;
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="description" property="og:description" content={description}/>
-    <meta name="twitter:title" property="og:title" content={title}/>
-    <meta name="twitter:image" property="og:image" content="https://offeringinspiration.com/card.png"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:site" content="@RandomBitsDev"/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="generator" content={Astro.generator}/>
-    <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Inconsolata"/>
-    <!--<script src="https://cdn.jsdelivr.net/npm/fontable@latest/dist/auto.js"></script>-->
-    <script>
-        navigator.serviceWorker.register("/sw.js")
-    </script>
-    <slot name="head"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width; initial-scale=1;"/>
+  <title>{title}</title>
+  <meta name="description" property="og:description" content={description}/>
+  <meta name="twitter:title" property="og:title" content={title}/>
+  <meta name="twitter:image" property="og:image" content="https://offeringinspiration.com/card.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@RandomBitsDev"/>
+  <meta name="generator" content={Astro.generator}/>
+  <link rel="canonical" href={removeTrailingSlash(Astro.url)}>
+  <meta name="theme-color" content="#fafafa"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Inconsolata"/>
+  <!--<script src="https://cdn.jsdelivr.net/npm/fontable@latest/dist/auto.js"></script>-->
+  <script>
+    navigator.serviceWorker.register("/sw.js");
+  </script>
+  <slot name="head"/>
 </head>
 <body>
 <slot/>
