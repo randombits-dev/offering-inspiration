@@ -3,15 +3,15 @@ const {name, blurb, url} = Astro.props;
 ---
 
 <div data-url={url}>
-    <div>{name}</div>
-    <div>{blurb}</div>
+  <div>{name}</div>
+  <div>{blurb}</div>
 </div>
 
 <script>
-    document.querySelectorAll('.lite-card').forEach(card =>{
-        card.addEventListener('click', (e) => {
-            const el = e.currentTarget as HTMLElement;
-            window.open(el.dataset.url, '_blank');
-        });
-    })
+  document.querySelectorAll('[data-url]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const el = e.currentTarget as HTMLElement;
+      window.open(el.dataset.url, '_blank');
+    });
+  });
 </script>

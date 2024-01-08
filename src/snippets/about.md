@@ -12,6 +12,8 @@ The data was compiled from successful projects on Kickstarter that have external
 
 Certain categories were excluded from the data set. Categories that contained mostly digital assets (like video games or music) and categories that contained mostly services (like a business) were excluded.
 
+To learn more about the data, read the [Full Article](https://medium.com/@randombitsdev/finding-successful-kickstarter-products-that-you-can-buy-now-0bf01b7d6c65)
+
 I plan to add more data sources in the future.
 
 # Reporting products that are not purchasable

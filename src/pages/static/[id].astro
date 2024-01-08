@@ -25,11 +25,13 @@ const {default: projects} = await import(`../../../public/Merged/${name}.json`);
       <a class="home" href="/"><img src="/logo.svg"/></a>
       {
         categories.map(([listID, cat]) => {
-          return;
-            <>{
-              listID === id ? <span>&nbsp;/&nbsp;<b>{cat.name}</b></span> :
-                <span>&nbsp;/&nbsp;<a href={`/static/${listID}`}>{cat.name}</a></span>
-            }</>;
+          return (
+            <>
+              {
+                listID === id ? <span>&nbsp;/&nbsp;<b>{cat.name}</b></span> :
+                  <span>&nbsp;/&nbsp;<a href={`/static/${listID}`}>{cat.name}</a></span>
+              }
+            </>);
         })
       }
     </div>
